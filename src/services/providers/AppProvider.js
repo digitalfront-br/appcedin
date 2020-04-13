@@ -6,6 +6,8 @@ export default function MyAppProvider({ children }) {
     const [loading, setLoading] =   useState(true);
     const [temas, setTemas]   =   useState([]); 
     const [videos, setVideos]   =   useState(null); 
+    const [ podcasts, setPodcasts ]   =   useState(null); 
+    const [ item, setItem ]   =   useState(null); 
 
     return  (
     <BaseContext.Provider
@@ -14,9 +16,14 @@ export default function MyAppProvider({ children }) {
             setLoading,
             videos,
             setVideos,
+            podcasts,
+            setPodcasts,
+            item,
+            setItem,
             temas,
             setTemas,
-            useTemas,
+            useVideos,
+            usePodcasts,
             useTema
         }} >
         { children }
@@ -31,43 +38,62 @@ export function useLoading() {
     return { loading, setLoading }
 };
 
-export function useTemas() {
-    const Context = useContext(BaseContext);
-    const { loading, setLoading, temas, setTemas }   =   Context
-
-    useEffect(()=> {
-        async function listaTemas() {
-            const chama =   await API('/temas')
-            const pega  =   await   chama.data
-            const guarda =  pega.data 
-            setTemas(guarda)
-            setLoading(false)
-        }
-        listaTemas()
-    }, [])
-    return { loading, setLoading, temas, setTemas }
-}
-
-export function useTema(id) {
+export function useVideos() {
     const Context = useContext(BaseContext);
     const { loading, setLoading, videos, setVideos }   =   Context
-    
-    
+
     useEffect(()=> {
-        setLoading(true)
-        async function listaVideos() {
-            const chama =   await API(`/temas/${id}?tipo=2`)
-            const pega  =   await   chama
-            const guarda =  pega.data
+        async function listaVideo() {
+            const chama =   await API("/temas?tipo=1")
+            const pega  =   await   chama.data
+            const guarda =  pega.data 
             setVideos(guarda)
             setLoading(false)
         }
-        listaVideos()
+        listaVideo()
     }, [])
     return { loading, setLoading, videos, setVideos }
 }
 
-// export function useTemas() {
+export function usePodcasts() {
+    const Context = useContext(BaseContext);
+    const { loading, setLoading, podcasts, setPodcasts }   =   Context
+
+    useEffect(()=> {
+        async function listaPodcast() {
+            const chama =   await API("/temas?tipo=2")
+            const pega  =   await   chama.data
+            const guarda =  pega.data 
+            console.log('retorno do podcast: ' ,guarda)
+            setPodcasts(guarda)
+            setLoading(false)
+        }
+        listaPodcast()
+    }, [])
+    return { loading, setLoading, podcasts, setPodcasts }
+}
+
+export function useTema(id) {
+    const Context = useContext(BaseContext);
+    const { loading, setLoading, item, setItem }   =   Context
+    
+    
+    useEffect(()=> {
+        setLoading(true)
+        async function listaItem() {
+            const chama =   await API(`/entidades/${id}`)
+            const pega  =   await   chama
+            const guarda =  pega.data
+            setItem(guarda)
+            setLoading(false)
+        }
+        listaItem()
+    }, [])
+    return { loading, setLoading, item, setItem }
+}
+
+
+// export function useVideos() {
 //     const Context = useContext(BaseContext);
 //     const { loading, setLoading, temas, setTemas }  =   Context;
 //     return { loading, setLoading, temas, setTemas } 

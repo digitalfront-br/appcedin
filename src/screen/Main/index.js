@@ -12,10 +12,10 @@ export default () => {
         <Abas.Navigator
             tabBarOptions={{
                 showLabel: false,
-                activeTintColor: "green",
+                activeTintColor: "rgba(0, 195, 168, .8)",
                 style: {
                     backgroundColor: "#000",
-                    marginBottom: -1
+                    borderTopColor: '#000',
                 }
             }}
             >
@@ -23,19 +23,19 @@ export default () => {
                 name="Videos" 
                 component={VideoScreen} 
                 options={{
-                    tabBarIcon:({color, size}) => <Feather name="home" color={color} size={size} />
+                    tabBarIcon:({color, size}) => <Feather name="home" color={color} size={30} />
                 }}/>
             <Abas.Screen 
                 name="Podcasts" 
                 component={PodcastScreen} 
                 options={{
-                    tabBarIcon:({color, size}) => <Feather name="mic" color={color} size={size} />
+                    tabBarIcon:({color, size}) => <Feather name="mic" color={color} size={30} />
                 }}/>
             <Abas.Screen 
                 name="Perfil" 
                 component={PerfilScreen} 
                 options={{
-                    tabBarIcon:({color, size}) => <Feather name="user" color={color} size={size} />
+                    tabBarIcon:({color, size}) => <Feather name="user" color={color} size={30} />
                 }}/>
         </Abas.Navigator>
   )};

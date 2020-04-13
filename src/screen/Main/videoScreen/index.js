@@ -8,9 +8,9 @@ const Page = createStackNavigator();
 
 export default () => {
     return (
-        <Page.Navigator>
-            <Page.Screen name="pagina video"  component={VideoScreen} />
-            <Page.Screen name="pagina video detalhe"  component={VideoDetail} />
+        <Page.Navigator headerMode="none" style={{backgroundColor: '#000'}}>
+            <Page.Screen name="Video"   component={VideoScreen} />
+            <Page.Screen name="VideoDetalhe"  component={VideoDetail} />
         </Page.Navigator>
     );
 }

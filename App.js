@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MyProvider, { useIslogin } from "./src/services/providers/AppProvider"; 
@@ -11,11 +12,12 @@ export default function App() {
   const [ islogin, setIslogin ]  = React.useState(true);
   return (
     <MyProvider>
+      
       <NavigationContainer>
         <Env.Navigator headerMode="none">
           { islogin ? (
             <>
-              <Env.Screen name="Main page" component={MainComponent} />
+              <Env.Screen name="Main page" component={MainComponent}  />
             </>
           ) : (
             <>
